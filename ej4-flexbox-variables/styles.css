@@ -1,0 +1,123 @@
+/* === VARIABLES CSS === */
+
+:root {
+  --color-principal: #2c3e50;
+  --color-fondo: #f5f0e8;
+  --color-texto: #2c2c2c;
+  --color-blanco: #ffffff;
+  --color-gris: #7f8c8d;
+  --borde-radio: 8px;
+  --sombra: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --padding-base: 24px;
+}
+
+/* === BOX SIZING GLOBAL === */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* === SELECTORES DE ETIQUETA === */
+
+body {
+  font-family: Georgia, serif;
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+}
+
+h1 {
+  font-size: 38px;
+  color: var(--color-principal);
+  margin-bottom: 8px;
+}
+
+h2 {
+  font-size: 22px;
+  color: var(--color-principal);
+  margin-bottom: 6px;
+}
+
+h3 {
+  font-size: 16px;
+  color: var(--color-gris);
+  font-weight: normal;
+  margin-bottom: 12px;
+}
+
+p {
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+ul {
+  margin-left: 20px;
+  margin-bottom: 16px;
+}
+
+ol {
+  margin-left: 20px;
+  margin-bottom: 16px;
+}
+
+li {
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+a {
+  color: var(--color-principal);
+}
+
+img {
+  border-radius: var(--borde-radio);
+  margin-bottom: 20px;
+}
+
+/* === SELECTORES DE CLASE === */
+
+.nav {
+  background-color: var(--color-principal);
+  padding: 16px var(--padding-base);
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  align-items: center;
+}
+
+.nav a {
+  color: var(--color-blanco);
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.nav a:hover {
+  text-decoration: underline;
+}
+
+.contenedor {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 var(--padding-base);
+  text-align: center;
+}
+
+.tarjeta {
+  background-color: var(--color-blanco);
+  border-left: 4px solid var(--color-principal);
+  padding: 20px var(--padding-base);
+  margin-bottom: 28px;
+  border-radius: var(--borde-radio);
+  box-shadow: var(--sombra);
+  text-align: left;
+}
+
+.imagen-hobby {
+  width: 200px;
+  display: block;
+  margin: 0 auto 20px auto;
+  border-radius: var(--borde-radio);
+  box-shadow: var(--sombra);
+}
