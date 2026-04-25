@@ -1,4 +1,4 @@
-function generarAsteriscos(n: string): string {
+function generarAsteriscos(n: number): string {
     let resultado = "";
     for (let i = 1; i <= n; i++) {
         resultado += "*".repeat(i) + "\n";
