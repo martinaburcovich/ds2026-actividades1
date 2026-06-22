@@ -1,4 +1,5 @@
-import { Container, Row, Col, Button } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import BookCard from '../components/BookCard'
 
 const libros = [
@@ -17,7 +18,7 @@ function Home() {
         <Container>
           <h1>Esra es mi libreria 📚</h1>
           <p className="lead">Descubrí los mejores libros</p>
-          <Button variant="dark" href="#">Ver catálogo</Button>
+          <Link to="/catalogo" className="btn btn-dark">Ver catálogo</Link>
         </Container>
       </section>
 
