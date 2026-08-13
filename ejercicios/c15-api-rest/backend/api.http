@@ -1,0 +1,97 @@
+@baseUrl = http://localhost:3000
+
+### Listar todos los libros - 200
+GET {{baseUrl}}/api/libros
+
+### Listar solamente libros disponibles - 200
+GET {{baseUrl}}/api/libros?disponible=true
+
+### Buscar un libro existente - 200
+GET {{baseUrl}}/api/libros/1
+
+### Buscar un libro inexistente - 404
+GET {{baseUrl}}/api/libros/999
+
+### Crear un libro - 201
+POST {{baseUrl}}/api/libros
+Content-Type: application/json
+
+{
+  "titulo": "1984",
+  "autor": "George Orwell",
+  "precio": 7200,
+  "imagen": "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&w=400&q=80",
+  "disponible": true
+}
+
+### Actualizar un libro existente - 200
+PUT {{baseUrl}}/api/libros/2
+Content-Type: application/json
+
+{
+  "titulo": "Cien años de soledad",
+  "autor": "Gabriel García Márquez",
+  "precio": 8200,
+  "imagen": "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=400&q=80",
+  "disponible": true
+}
+
+### Actualizar un libro inexistente - 404
+PUT {{baseUrl}}/api/libros/999
+Content-Type: application/json
+
+{
+  "titulo": "Libro inexistente",
+  "autor": "Autor inexistente",
+  "precio": 1000,
+  "imagen": "https://example.com/libro.jpg",
+  "disponible": false
+}
+
+### Borrar un libro existente - 204
+DELETE {{baseUrl}}/api/libros/3
+
+### Borrar un libro inexistente - 404
+DELETE {{baseUrl}}/api/libros/999
+
+### Listar todos los autores - 200
+GET {{baseUrl}}/api/autores
+
+### Buscar un autor existente - 200
+GET {{baseUrl}}/api/autores/1
+
+### Buscar un autor inexistente - 404
+GET {{baseUrl}}/api/autores/999
+
+### Crear un autor - 201
+POST {{baseUrl}}/api/autores
+Content-Type: application/json
+
+{
+  "nombre": "George Orwell",
+  "nacionalidad": "Reino Unido"
+}
+
+### Actualizar un autor existente - 200
+PUT {{baseUrl}}/api/autores/2
+Content-Type: application/json
+
+{
+  "nombre": "Gabriel García Márquez",
+  "nacionalidad": "Colombia"
+}
+
+### Actualizar un autor inexistente - 404
+PUT {{baseUrl}}/api/autores/999
+Content-Type: application/json
+
+{
+  "nombre": "Autor inexistente",
+  "nacionalidad": "Desconocida"
+}
+
+### Borrar un autor existente - 204
+DELETE {{baseUrl}}/api/autores/3
+
+### Borrar un autor inexistente - 404
+DELETE {{baseUrl}}/api/autores/999
