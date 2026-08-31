@@ -1,0 +1,58 @@
+@baseUrl = http://localhost:3000
+
+### 200 - listado con autor
+GET {{baseUrl}}/api/libros
+
+### 200 - detalle con autor y categorías
+GET {{baseUrl}}/api/libros/1
+
+### 201 - crear libro
+POST {{baseUrl}}/api/libros
+Content-Type: application/json
+
+{ "titulo": "1984", "precio": 7200, "imagen": "https://example.com/1984.jpg", "disponible": true, "autorId": 1 }
+
+### 400 - falta el título
+POST {{baseUrl}}/api/libros
+Content-Type: application/json
+
+{ "precio": 5000, "imagen": "https://example.com/libro.jpg", "autorId": 1 }
+
+### 400 - parámetro inválido
+GET {{baseUrl}}/api/libros/abc
+
+### 409 - autor inexistente, violación de FK
+POST {{baseUrl}}/api/libros
+Content-Type: application/json
+
+{ "titulo": "Huérfano", "precio": 5000, "imagen": "https://example.com/libro.jpg", "autorId": 9999 }
+
+### 404 - libro inexistente
+PUT {{baseUrl}}/api/libros/9999
+Content-Type: application/json
+
+{ "precio": 9000 }
+
+### 200 - listar autores
+GET {{baseUrl}}/api/autores
+
+### 201 - crear autor
+POST {{baseUrl}}/api/autores
+Content-Type: application/json
+
+{ "nombre": "George Orwell", "nacionalidad": "Reino Unido" }
+
+### 409 - autor duplicado
+POST {{baseUrl}}/api/autores
+Content-Type: application/json
+
+{ "nombre": "Gabriel García Márquez", "nacionalidad": "Colombia" }
+
+### 409 - autor con libros relacionados
+DELETE {{baseUrl}}/api/autores/1
+
+### 400 - id inválido
+GET {{baseUrl}}/api/autores/-5
+
+### 404 - autor inexistente
+GET {{baseUrl}}/api/autores/9999
