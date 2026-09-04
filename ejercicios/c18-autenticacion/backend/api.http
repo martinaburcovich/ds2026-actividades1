@@ -1,0 +1,79 @@
+@baseUrl = http://localhost:3000
+
+### 1. Registro - 201 sin passwordHash
+POST {{baseUrl}}/api/auth/registro
+Content-Type: application/json
+
+{ "nombre": "Ana", "email": "ana@libreria.test", "password": "Libreria2026" }
+
+### 2. Registro repetido - 409
+POST {{baseUrl}}/api/auth/registro
+Content-Type: application/json
+
+{ "nombre": "Ana", "email": "ana@libreria.test", "password": "Libreria2026" }
+
+### 3. Contraseña corta - 400 con tres detalles
+POST {{baseUrl}}/api/auth/registro
+Content-Type: application/json
+
+{ "nombre": "Débil", "email": "debil@libreria.test", "password": "corta" }
+
+### 4. Mail inexistente - 401 Credenciales inválidas
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{ "email": "nadie@libreria.test", "password": "Cualquiera123" }
+
+### 5. Contraseña incorrecta - 401 con el mismo mensaje
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{ "email": "cliente@libreria.test", "password": "Incorrecta123" }
+
+### 6. Login CLIENTE - 200 con token
+# @name loginCliente
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{ "email": "cliente@libreria.test", "password": "Cliente1234" }
+
+@clienteToken = {{loginCliente.response.body.token}}
+
+### Login ADMIN para el caso 11
+# @name loginAdmin
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{ "email": "admin@libreria.test", "password": "Admin1234" }
+
+@adminToken = {{loginAdmin.response.body.token}}
+
+### 7. /yo sin token - 401
+GET {{baseUrl}}/api/auth/yo
+
+### 8. /yo con CLIENTE - 200
+GET {{baseUrl}}/api/auth/yo
+Authorization: Bearer {{clienteToken}}
+
+### 9. Crear libro sin token - 401
+POST {{baseUrl}}/api/libros
+Content-Type: application/json
+
+{ "titulo": "1984", "precio": 7200, "imagen": "https://example.com/1984.jpg", "autorId": 1 }
+
+### 10. Crear libro como CLIENTE - 403
+POST {{baseUrl}}/api/libros
+Authorization: Bearer {{clienteToken}}
+Content-Type: application/json
+
+{ "titulo": "1984", "precio": 7200, "imagen": "https://example.com/1984.jpg", "autorId": 1 }
+
+### 11. Crear libro como ADMIN - 201
+POST {{baseUrl}}/api/libros
+Authorization: Bearer {{adminToken}}
+Content-Type: application/json
+
+{ "titulo": "1984", "precio": 7200, "imagen": "https://example.com/1984.jpg", "autorId": 1 }
+
+### 12. Listar libros sin token - 200
+GET {{baseUrl}}/api/libros
