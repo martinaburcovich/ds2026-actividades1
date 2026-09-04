@@ -1,4 +1,6 @@
 @baseUrl = http://localhost:3000
+@clienteToken = {{loginCliente.response.body.token}}
+@adminToken = {{loginAdmin.response.body.token}}
 
 ### 1. Registro - 201 sin passwordHash
 POST {{baseUrl}}/api/auth/registro
@@ -37,16 +39,12 @@ Content-Type: application/json
 
 { "email": "cliente@libreria.test", "password": "Cliente1234" }
 
-@clienteToken = {{loginCliente.response.body.token}}
-
 ### Login ADMIN para el caso 11
 # @name loginAdmin
 POST {{baseUrl}}/api/auth/login
 Content-Type: application/json
 
 { "email": "admin@libreria.test", "password": "Admin1234" }
-
-@adminToken = {{loginAdmin.response.body.token}}
 
 ### 7. /yo sin token - 401
 GET {{baseUrl}}/api/auth/yo
