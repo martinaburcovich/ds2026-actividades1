@@ -1,0 +1,13 @@
+CREATE TYPE "Rol" AS ENUM ('ADMIN', 'CLIENTE');
+
+CREATE TABLE "Usuario" (
+    "id" SERIAL NOT NULL,
+    "email" TEXT NOT NULL,
+    "passwordHash" TEXT NOT NULL,
+    "nombre" TEXT NOT NULL,
+    "rol" "Rol" NOT NULL DEFAULT 'CLIENTE',
+    "creadoEn" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT "Usuario_pkey" PRIMARY KEY ("id")
+);
+
+CREATE UNIQUE INDEX "Usuario_email_key" ON "Usuario"("email");
