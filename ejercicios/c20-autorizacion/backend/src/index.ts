@@ -8,7 +8,7 @@ import { errorHandler } from "./middlewares/error.middleware";
 import { z } from "zod";
 
 const app = express();
-const PORT = 3000;
+const PORT = Number(process.env.PORT ?? 3000);
 const corsOptions = {
   origin: [process.env.FRONTEND_URL ?? "http://localhost:5173"],
 };
@@ -35,6 +35,6 @@ app.use((_req, res) => {
 
 app.use(errorHandler);
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`Servidor escuchando en http://localhost:${PORT}`);
 });
