@@ -7,9 +7,11 @@ interface LayoutProps { children: ReactNode }
 
 function Layout({ children }: LayoutProps) {
   return (
-    <div>
+    <div className="app-shell">
       <Header />
-      <Container className="py-4">{children}</Container>
+      <main className="site-main">
+        <Container className="py-4 py-md-5">{children}</Container>
+      </main>
       <Footer />
     </div>
   )

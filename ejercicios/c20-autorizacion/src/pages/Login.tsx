@@ -2,9 +2,9 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Alert, Button, Container, Form } from 'react-bootstrap'
+import { Alert, Button, Form } from 'react-bootstrap'
 import { loginSchema, type LoginValidado } from '../schemas/loginSchema'
-import { useAuth } from '../context/AuthContext'
+import { useAuth } from '../hooks/useAuth'
 
 function Login() {
   const navigate = useNavigate()
@@ -25,25 +25,28 @@ function Login() {
   }
 
   return (
-    <Container className="my-5" style={{ maxWidth: 480 }}>
-      <h2 className="mb-4">Iniciar sesión</h2>
-      {errorApi && <Alert variant="danger">{errorApi}</Alert>}
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <Form.Group className="mb-3">
-          <Form.Label>Email</Form.Label>
-          <Form.Control type="email" {...register('email')} isInvalid={!!errors.email} />
-          <Form.Control.Feedback type="invalid">{errors.email?.message}</Form.Control.Feedback>
-        </Form.Group>
-        <Form.Group className="mb-4">
-          <Form.Label>Contraseña</Form.Label>
-          <Form.Control type="password" {...register('password')} isInvalid={!!errors.password} />
-          <Form.Control.Feedback type="invalid">{errors.password?.message}</Form.Control.Feedback>
-        </Form.Group>
-        <Button type="submit" variant="dark" disabled={isSubmitting}>
-          {isSubmitting ? 'Ingresando...' : 'Ingresar'}
-        </Button>
-      </Form>
-    </Container>
+    <section className="form-page">
+      <div className="form-panel">
+        <h1>Iniciar sesión</h1>
+        <p className="form-intro">Ingresá para continuar explorando la librería.</p>
+        {errorApi && <Alert variant="danger">{errorApi}</Alert>}
+        <Form onSubmit={handleSubmit(onSubmit)}>
+          <Form.Group className="mb-3">
+            <Form.Label>Email</Form.Label>
+            <Form.Control type="email" autoComplete="email" placeholder="nombre@correo.com" {...register('email')} isInvalid={!!errors.email} />
+            <Form.Control.Feedback type="invalid">{errors.email?.message}</Form.Control.Feedback>
+          </Form.Group>
+          <Form.Group className="mb-4">
+            <Form.Label>Contraseña</Form.Label>
+            <Form.Control type="password" autoComplete="current-password" placeholder="Tu contraseña" {...register('password')} isInvalid={!!errors.password} />
+            <Form.Control.Feedback type="invalid">{errors.password?.message}</Form.Control.Feedback>
+          </Form.Group>
+          <Button type="submit" variant="primary" className="w-100" disabled={isSubmitting}>
+            {isSubmitting ? 'Ingresando...' : 'Ingresar'}
+          </Button>
+        </Form>
+      </div>
+    </section>
   )
 }
 

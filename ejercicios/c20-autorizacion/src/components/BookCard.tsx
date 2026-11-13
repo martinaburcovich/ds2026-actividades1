@@ -1,27 +1,32 @@
 import { useState } from 'react'
 import { Card, Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import type { Libro } from '../types/libro'
 
-type Props = Pick<Libro, 'titulo' | 'imagen' | 'autor'>
+interface Props {
+  libro: Libro
+}
 
-function BookCard({ titulo, imagen, autor }: Props) {
+function BookCard({ libro }: Props) {
   const [meGusta, setMeGusta] = useState(false)
 
   return (
-    <Card className="h-100">
+    <Card className="book-card h-100 border-0">
       <Card.Img
         variant="top"
-        src={imagen}
-        alt={titulo}
+        className="book-cover"
+        src={libro.imagen}
+        alt={libro.titulo}
       />
       <Card.Body>
-        <Card.Title>{titulo}</Card.Title>
-        <Card.Text>{autor.nombre}</Card.Text>
-        <div className="d-flex gap-2">
-          <Button variant="primary">Ver más</Button>
+        <Card.Title>{libro.titulo}</Card.Title>
+        <Card.Text className="book-author">{libro.autor.nombre}</Card.Text>
+        <div className="book-actions">
+          <Link to={`/libros/${libro.id}`} className="btn btn-primary">Ver más</Link>
           <Button
             variant={meGusta ? 'danger' : 'outline-danger'}
             onClick={() => setMeGusta(!meGusta)}
+            aria-pressed={meGusta}
           >
             {meGusta ? '❤️ Guardado' : '🤍 Me gusta'}
           </Button>

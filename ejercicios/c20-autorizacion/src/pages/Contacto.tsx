@@ -1,27 +1,47 @@
-import { Container } from 'react-bootstrap'
+import { useState, type FormEvent } from 'react'
+import { Alert, Button, Col, Form, Row } from 'react-bootstrap'
 
 function Contacto() {
+  const [enviado, setEnviado] = useState(false)
+
+  const manejarEnvio = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    setEnviado(true)
+    event.currentTarget.reset()
+  }
+
   return (
-    <Container className="my-5">
-      <h2>Contacto</h2>
-      <div className="row">
-        <div className="col-md-6">
-          <div className="mb-3">
-            <label className="form-label">Nombre</label>
-            <input type="text" className="form-control" placeholder="Tu nombre" />
+    <section className="contact-page">
+      <Row className="g-4 align-items-stretch">
+        <Col lg={5}>
+          <div className="contact-intro h-100">
+            <h1>Contacto</h1>
+            <p>Dejanos tu mensaje y nos comunicamos con vos a la brevedad.</p>
+            <div className="contact-detail"><span aria-hidden="true">📚</span><span>Estamos para ayudarte a elegir tu próxima lectura.</span></div>
           </div>
-          <div className="mb-3">
-            <label className="form-label">Email</label>
-            <input type="email" className="form-control" placeholder="tu@email.com" />
+        </Col>
+        <Col lg={7}>
+          <div className="form-panel contact-form-panel h-100">
+            {enviado && <Alert variant="success" aria-live="polite">¡Gracias! Tu mensaje quedó registrado en esta demostración.</Alert>}
+            <Form onSubmit={manejarEnvio}>
+              <Form.Group className="mb-3">
+                <Form.Label htmlFor="contacto-nombre">Nombre</Form.Label>
+                <Form.Control id="contacto-nombre" name="nombre" required placeholder="Tu nombre" />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label htmlFor="contacto-email">Email</Form.Label>
+                <Form.Control id="contacto-email" name="email" type="email" required placeholder="tu@email.com" />
+              </Form.Group>
+              <Form.Group className="mb-4">
+                <Form.Label htmlFor="contacto-mensaje">Mensaje</Form.Label>
+                <Form.Control id="contacto-mensaje" name="mensaje" as="textarea" rows={5} required placeholder="¿En qué podemos ayudarte?" />
+              </Form.Group>
+              <Button type="submit" variant="primary">Enviar consulta</Button>
+            </Form>
           </div>
-          <div className="mb-3">
-            <label className="form-label">Mensaje</label>
-            <textarea className="form-control" rows={4} placeholder="Escribí tu mensaje..." />
-          </div>
-          <button className="btn btn-dark">Enviar</button>
-        </div>
-      </div>
-    </Container>
+        </Col>
+      </Row>
+    </section>
   )
 }
 

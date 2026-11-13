@@ -1,18 +1,8 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react'
 import { apiFetch } from '../services/api'
 import { borrarToken, guardarToken, obtenerToken } from '../services/sesion'
 import type { Credenciales, Rol, Sesion, Usuario } from '../types/sesion'
-
-interface AuthContextType {
-  usuario: Usuario | null
-  cargando: boolean
-  estaAutenticado: boolean
-  tieneRol: (rol: Rol) => boolean
-  login: (credenciales: Credenciales) => Promise<void>
-  logout: () => void
-}
-
-const AuthContext = createContext<AuthContextType | null>(null)
+import { AuthContext } from './auth-context'
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [usuario, setUsuario] = useState<Usuario | null>(null)
@@ -56,10 +46,4 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }), [cargando, login, logout, usuario])
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
-}
-
-export function useAuth() {
-  const context = useContext(AuthContext)
-  if (!context) throw new Error('useAuth debe usarse dentro de un AuthProvider')
-  return context
 }

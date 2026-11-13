@@ -7,8 +7,10 @@ import LibroDetalle from './pages/LibroDetalle'
 import LibroNuevo from './pages/LibroNuevo'
 import Login from './pages/Login'
 import SinPermiso from './pages/SinPermiso'
+import NoEncontrado from './pages/NoEncontrado'
 import { PrivateRoute } from './components/PrivateRoute'
 import { AuthProvider } from './context/AuthContext'
+import './App.css'
 
 function App() {
   return (
@@ -23,7 +25,8 @@ function App() {
           <Route element={<PrivateRoute rol="ADMIN" />}>
             <Route path="/libros/nuevo" element={<LibroNuevo />} />
           </Route>
-          <Route path="/libros/:isbn" element={<LibroDetalle />} />
+          <Route path="/libros/:id" element={<LibroDetalle />} />
+          <Route path="*" element={<NoEncontrado />} />
         </Routes>
       </Layout>
     </AuthProvider>
